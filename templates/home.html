@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Complaint System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+        textarea {
+            height: 150px;
+            resize: none;
+        }
+        .identity-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .identity-box p {
+            margin: 0 0 10px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        .option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        #name-field {
+            display: none;
+            margin-top: 10px;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover { background: #2980b9; }
+        .admin-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .admin-link a {
+            color: #bbb;
+            font-size: 12px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Smart Complaint System</h1>
+        <p class="subtitle">Submit your complaint and our AI will route it to the right department</p>
+
+        <form method="POST" action="/submit">
+            <input type="text" name="title" placeholder="Complaint Title" required>
+            <textarea name="description" placeholder="Describe your complaint here..." required></textarea>
+
+            <div class="identity-box">
+                <p>How would you like to submit?</p>
+
+                <label class="option">
+                    <input type="radio" name="anonymous" value="no"
+                    onclick="document.getElementById('name-field').style.display='block'"
+                    required> With my name
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="anonymous" value="yes"
+                    onclick="document.getElementById('name-field').style.display='none'">
+                    Anonymous
+                </label>
+
+                <div id="name-field">
+                    <input type="text" name="name" placeholder="Enter your name">
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Submit Complaint 📨</button>
+        </form>
+
+        <div class="admin-link">
+            <a href="/admin">Admin Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

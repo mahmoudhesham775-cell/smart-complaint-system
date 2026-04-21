@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>داشبورد الطالب</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            background: #e74c3c;
+            padding: 8px 15px;
+            border-radius: 6px;
+        }
+        .btn-new {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            border-collapse: collapse;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        th {
+            background: #2c3e50;
+            color: white;
+            padding: 12px;
+            text-align: right;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover { background: #f9f9f9; }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .IT { background: #d5e8ff; color: #1a5fa8; }
+        .Academic { background: #d5ffd8; color: #1a7a1e; }
+        .Finance { background: #fff3d5; color: #a87c1a; }
+        .General { background: #f0f0f0; color: #555; }
+        .pending { background: #fff3d5; color: #a87c1a; }
+        .resolved { background: #d5ffd8; color: #1a7a1e; }
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>👋 أهلاً {{ session['name'] }}</h2>
+        <a href="/logout">خروج</a>
+    </div>
+
+    <a href="/submit" class="btn-new">+ رفع شكوى جديدة</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>عنوان الشكوى</th>
+                <th>التصنيف</th>
+                <th>الحالة</th>
+                <th>التاريخ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if complaints %}
+                {% for c in complaints %}
+                <tr>
+                    <td>{{ c['id'] }}</td>
+                    <td>{{ c['title'] }}</td>
+                    <td><span class="badge {{ c['category'] }}">{{ c['category'] }}</span></td>
+                    <td><span class="badge {{ c['status'] }}">{{ c['status'] }}</span></td>
+                    <td>{{ c['created_at'] }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5" class="empty">مفيش شكاوى لحد دلوقتي، اضغط رفع شكوى جديدة!</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>
